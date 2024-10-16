@@ -15,7 +15,6 @@ const Account = () => {
   const router = useRouter();
   const [selectedMenu, setSelectedMenu] = useState("info");
 
-  const { data: session } = useSession();
 
 
   const handleLogout = () => {
