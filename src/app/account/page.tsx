@@ -1,9 +1,9 @@
 "use client";
 import { useEffect } from 'react';
 import { useSession } from "next-auth/react";
-import Account from './components/account/Account';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Account from '../components/account/Account';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { useRouter} from 'next/navigation';
 
 

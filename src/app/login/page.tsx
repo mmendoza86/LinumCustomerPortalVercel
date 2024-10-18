@@ -1,13 +1,26 @@
 "use client";
-import { useState } from 'react';
+import { useState } from 'react'
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
+import { useRouter} from 'next/navigation';
+import { useEffect } from 'react';
+import { useSession } from "next-auth/react";
 
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
+  const { data: session, status  } = useSession();
+
+  useEffect(() => {
+    if (status === "loading") return; // Espera a que la sesión se cargue
+
+    if (session) {
+      router.push("/account"); // Redirige a /login si no hay sesión
+    }
+  }, [session, status, router]);
 
   const handleErrorAuth = (err)=>{
     switch (err) {
@@ -34,7 +47,7 @@ export default function Login() {
       console.log("Error during sign-in:", res.error);
       setError(res.error);
     } else {
-        window.location.href = "/";
+        router.push('/account'); // Redirigir después de inicio de sesión
     }
   };
 
