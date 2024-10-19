@@ -1,20 +1,22 @@
 import axios from 'axios';
 import React,{useEffect, useState} from 'react'
-import { Router } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import { useSession } from "next-auth/react";
 
 export default function CompInfo() {
+  const router = useRouter();
   const { data: session  } = useSession();
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [telefonoMovil,setTelefonoMovil] = useState('');
   const [nombre, setnombre] = useState('');
   const [apellido, setapellido] = useState('');
-  const [ErrorUpdate, setErrorUpdate] = useState("");
+  const [ErrorUpdate, setErrorUpdate] = useState(false);
   const [password , setPassword] = useState("00000000");
   const [IsUpdate,setIsUpdate] = useState(false);
   const [editable, setEditable] = useState(false);
+  
   
 
   useEffect(() => {
@@ -47,37 +49,37 @@ export default function CompInfo() {
           if(error.response?.status === 401){
               localStorage.removeItem('SessionUser');
               localStorage.removeItem('Logged');
-              Router.push("/login")
+              router.push("/login")
           }else
             console.error('Error delivery_points:', error);
         });
   }, []);
   
-const handleNombreChange = (event) => {
+const handleNombreChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
       setnombre(event.target.value);
   };
 
-  const handleApellidoChange = (event) => {
+  const handleApellidoChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
       setapellido(event.target.value);
   };
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
       setEmail(event.target.value);
   };
 
-  const handleTelefonoChange = (event) => {
+  const handleTelefonoChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
       setTelefono(event.target.value);
   };
 
-  const handleTelefonoMovilChange = (event) => {
+  const handleTelefonoMovilChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
       setTelefonoMovil(event.target.value);
   };
 
-  const handlePasswordChange = (event) => {
+  const handlePasswordChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
       setPassword(event.target.value)
   }
 
-  const handlePerfil = (event) => {
+  const handlePerfil = (event: { preventDefault: () => void; }) => {
       event.preventDefault();
       
       const RegisterData = {
@@ -106,7 +108,7 @@ const handleNombreChange = (event) => {
           if(error.response?.status === 401){
               localStorage.removeItem('SessionUser');
               localStorage.removeItem('Logged');
-              Router.push("/login")
+              router.push("/login")
           }else
             console.error('Error delivery_points:', error);
             setErrorUpdate(true);
@@ -115,7 +117,7 @@ const handleNombreChange = (event) => {
       
   }
 
-  const toggleEdit = (event) => {
+  const toggleEdit = (event: { preventDefault: () => void; }) => {
       event.preventDefault();
       setEditable(!editable);
       if(editable)
@@ -185,7 +187,7 @@ const handleNombreChange = (event) => {
             placeholder="Teléfono a 10 dígitos"
             pattern="[0-9]{10}"
             title="Ingresa los 10 dígitos de tu teléfono"
-            maxLength="10"
+            maxLength={10}
             inputMode="numeric"
             required
             readOnly={!editable}
@@ -205,7 +207,7 @@ const handleNombreChange = (event) => {
             placeholder="Teléfono a 10 dígitos"
             pattern="[0-9]{10}"
             title="Ingresa los 10 dígitos de tu teléfono"
-            maxLength="10"
+            maxLength={10}
             inputMode="numeric"
             readOnly={!editable}
             style={{ color: editable ? 'black' : 'gray' }}
@@ -220,7 +222,7 @@ const handleNombreChange = (event) => {
             value={password}
             onChange={handlePasswordChange}
             placeholder="Contraseña"
-            minLength="8"
+            minLength={8}
             required
             readOnly={!editable}
             style={{ color: editable ? 'black' : 'gray' }}

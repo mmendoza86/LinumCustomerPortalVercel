@@ -22,7 +22,7 @@ export default function Login() {
     }
   }, [session, status, router]);
 
-  const handleErrorAuth = (err)=>{
+  const handleErrorAuth = (err: string)=>{
     switch (err) {
         case "CredentialsSignin":
             return "Credenciales incorrectas. Por favor, intenta nuevamente.";

@@ -2,7 +2,7 @@
 
 import { useRouter} from 'next/navigation';
 import {signOut, useSession} from "next-auth/react";
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import CompInfo from './info/CompInfo';
 import CompPedidos from './pedidos/CompPedidos';
 import CompDirecciones from './direcciones/CompDirecciones';
@@ -23,7 +23,7 @@ const Account = () => {
     router.push("/login");
   };
 
-  const handleMenuClick = (menu) => {
+  const handleMenuClick = (menu: SetStateAction<string>) => {
     setSelectedMenu(menu);
   };
 

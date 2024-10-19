@@ -1,13 +1,14 @@
 import React,{useEffect, useState} from 'react'
 import axios from 'axios';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { Router } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import { useSession } from "next-auth/react";
 import AddTC from './AddTarjeta/AddTC';
 import CardTC from '../CardTC';
 
 
 const CompMetodos = () => {
+    const router = useRouter();
     const { data: session  } = useSession();
     const [isAddAdress , setisAddAdress] = useState(false);
     const [DeleteCardTC,SetDeleteCardTC] = useState(false);
@@ -20,7 +21,7 @@ useEffect(() => {
     axios
         .get(process.env.NEXT_PUBLIC_API_LINUM + '/api/credit_cards', {
             headers: {
-                'Authorization': 'Bearer ' + session.access_token
+                'Authorization': 'Bearer ' + session?.access_token
             }
         })
         .then((response) => {
@@ -31,7 +32,7 @@ useEffect(() => {
         if(error.response?.status === 401){
             localStorage.removeItem('SessionUser');
             localStorage.removeItem('Logged');
-            Router.push("/login")
+            router.push("/login")
         }else
             console.error('Error delivery_points:', error);
         });
@@ -46,13 +47,13 @@ const handleopenAddress = () => {
     }
 }
 
-const handleTC = (Data) =>{ }
+const handleTC = () =>{ }
 
-const handleRegistroAgregado = (newTC) => {  //Manejador para saber si se agrego un nuevo registro
+const handleRegistroAgregado = (newTC: any) => {  //Manejador para saber si se agrego un nuevo registro
     if(newTC)
       SetNewCardTC(true);
   };
-const handleRegistroEliminado = (DeleteAddress) => {  //Manejador para saber si se elimino un registro
+const handleRegistroEliminado = (DeleteAddress: any) => {  //Manejador para saber si se elimino un registro
   if(DeleteAddress)
       SetDeleteCardTC(true);
 };
@@ -80,7 +81,7 @@ const handleCloseAddDireccion = () =>{
                             Adrs = {DataTC} 
                             index = {index}
                             selected = {SelectedIdTC} 
-                            onClick={() => handleTC(DataTC)}
+                            onClick={() => handleTC()}
                             onRegistroEliminado = {handleRegistroEliminado}
                             comp={"perfil"}
                             key={index}

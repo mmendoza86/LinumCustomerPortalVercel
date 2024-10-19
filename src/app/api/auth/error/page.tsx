@@ -1,11 +1,11 @@
 "use client";
+
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 const ErrorPage = () => {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
-
-  console.log(searchParams);
 
   let errorMessage = "";
 
@@ -30,4 +30,12 @@ const ErrorPage = () => {
   );
 };
 
-export default ErrorPage;
+const ErrorPageWrapper = () => {
+  return (
+    <Suspense fallback={<div>Cargando...</div>}>
+      <ErrorPage />
+    </Suspense>
+  );
+};
+
+export default ErrorPageWrapper;

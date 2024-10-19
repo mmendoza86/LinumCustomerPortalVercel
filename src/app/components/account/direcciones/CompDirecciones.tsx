@@ -44,7 +44,7 @@ const CompDirecciones = () => {
           }
     }, [session]);
 
-    const handleAddressCard = (Address) =>{
+    const handleAddressCard = (Address: never) =>{
         ////console.log(Address);
     }
 
@@ -57,12 +57,12 @@ const CompDirecciones = () => {
             setIsEditDireccion(null);
         }
     }
-    const handleRegistroEliminado = (DeleteAddress) => {  //Manejador para saber si se elimino un registro
+    const handleRegistroEliminado = (DeleteAddress: any) => {  //Manejador para saber si se elimino un registro
         if(DeleteAddress)
           SetDeleteAddress(true);
       };
 
-      const handleRegistroAgregado = (newAddress) => {  //Manejador para saber si se agrego un nuevo registro
+      const handleRegistroAgregado = (newAddress: any) => {  //Manejador para saber si se agrego un nuevo registro
         if(newAddress)
           SetNewAddress(true);
       };
@@ -71,7 +71,7 @@ const CompDirecciones = () => {
         setisAddAdress(false);
       }
 
-      const handleEditDireccion = (EditDireccion) =>{
+      const handleEditDireccion = (EditDireccion: React.SetStateAction<null>) =>{
         if(EditDireccion){
             setIsEditDireccion(EditDireccion);
             setisAddAdress(true);

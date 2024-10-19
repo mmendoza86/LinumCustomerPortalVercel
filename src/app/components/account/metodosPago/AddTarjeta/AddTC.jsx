@@ -154,7 +154,7 @@ const AddTC = (props) => {
                                 onChange={handleTCNumber}
                                 pattern="[0-9]{16}"
                                 title="Ingresa los 16 dígitos de tu tarjeta" 
-                                maxLength="16"
+                                maxLength={16}
                                 inputMode="numeric"
                                 required
                             />
@@ -168,7 +168,7 @@ const AddTC = (props) => {
                                 onChange={handleTCCvv}
                                 pattern="[0-9]{3,4}"
                                 title="Ingresa los 3 o 4 dígitos al reverso de tu tarjeta" 
-                                maxLength="4"
+                                maxLength={4}
                                 inputMode="numeric"
                                 required
                             />

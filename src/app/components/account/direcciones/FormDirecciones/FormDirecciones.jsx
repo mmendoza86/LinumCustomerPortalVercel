@@ -344,7 +344,7 @@ const FormDirecciones = (props) => {
             onChange={handleTelefonoChange}
             placeholder="Teléfono a 10 dígitos"
             pattern="[0-9]{10}"
-            maxLength="10"
+            maxLength={10}
             inputMode="numeric"
             required
             className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
